@@ -50,6 +50,12 @@ def main():
                 print("Game Over!")
                 done = True
 
+            for bullet in shots:
+                if asteroid.CollisionCheck(bullet):
+                    asteroid.kill()
+                    bullet.kill()
+
+
         pygame.display.flip()
         dt = clock.tick(FPS) / 1000.0
     pygame.quit()
