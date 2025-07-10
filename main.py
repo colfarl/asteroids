@@ -28,9 +28,10 @@ def main():
     #Instances
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     asteroidfield = AsteroidField()
-
+    
+    done = False
     #Game Loop
-    while True:
+    while not done:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
@@ -39,10 +40,15 @@ def main():
         updateable.update(dt)
         for sprite in drawable:
             sprite.draw(screen)
+        
+        for asteroid in asteroids:
+            if asteroid.CollisionCheck(player):
+                print("Game Over!")
+                done = True
 
         pygame.display.flip()
         dt = clock.tick(FPS) / 1000.0
-        
+    pygame.quit()
 
 if __name__ == "__main__":
     main()
